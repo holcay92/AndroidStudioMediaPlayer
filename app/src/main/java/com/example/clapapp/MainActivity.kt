@@ -33,8 +33,9 @@ class MainActivity : AppCompatActivity() {
         }
         btn_stop.setOnClickListener {
             mediaPlayer?.stop()
-            // initialize the media player again
-            mediaPlayer = MediaPlayer.create(this, R.raw.music)
+            mediaPlayer?.reset()
+            mediaPlayer?.release()
+            mediaPlayer = null
         }
     }
 }
