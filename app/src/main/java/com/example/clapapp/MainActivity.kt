@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val btn_stop = findViewById<FloatingActionButton>(R.id.btn_stop)
 
         btn_play.setOnClickListener {
-            if (mediaPlayer != null) {
+            if (mediaPlayer == null) {
                 mediaPlayer = MediaPlayer.create(this, R.raw.music)
                 initSeekBar()
             }
@@ -60,11 +60,11 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                mediaPlayer?.pause()
+
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                mediaPlayer?.start()
+
             }
 
         })
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             val playedTime = mediaPlayer!!.currentPosition/1000
             tvPlayed.text = "$playedTime sec"
             val duration = mediaPlayer!!.duration/1000
-            tvDue.text = "$duration sec"
+            tvDue.text = "${duration - playedTime} sec"
             // this will add the thread to the queue
             // and will run the thread after 1000 milliseconds
             handler.postDelayed(runnable, 1000)
